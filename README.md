@@ -48,7 +48,7 @@ pip install -r requirements.txt
 #### Windows
 instal o git na sua máquina a partir do link:
 
-### [install git](https://git-scm.com/downloads/win)
+##### [install git](https://git-scm.com/downloads/win)
 
 verifique se o Python 3 já está instalado na sua máquina:
 ```
@@ -57,7 +57,7 @@ python3 --version
 
 caso não, instale:
 
-### [install python3](https://www.python.org/downloads/)
+##### [install python3](https://www.python.org/downloads/)
 
 instale as dependências do projeto:
 ```
@@ -68,7 +68,7 @@ pip install -r requirements.txt
 #### MacOS
 instale o git na sua máquina a partir do link:
 
-### [install git](https://git-scm.com/downloads/mac)
+##### [install git](https://git-scm.com/downloads/mac)
 
 instale o Python 3:
 ```
@@ -84,8 +84,8 @@ pip install -r requirements.txt
 ## Fluxo de trabalho
 #### Nomenclatura de branchs:
 - ***main***: branch principal
-- ***feature/<nome-da-feature>***: funcionalidades novas
-- ***fix/<nome-do-fix>***: consertos de bugs
+- ***feat/nome-da-feature***: funcionalidades novas
+- ***fix/nome-do-fix***: consertos de bugs
 
 #### Nomenclatura de commits:
 - ***feat: descrição da alteração***: funcionalidades novas
