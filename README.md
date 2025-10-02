@@ -45,6 +45,11 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+faça uma migração:
+```
+pyhton3 manage.py migrate
+```
+
 #### Windows
 instal o git na sua máquina a partir do link:
 
@@ -64,6 +69,10 @@ instale as dependências do projeto:
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+faça uma migração:
+```
+pyhton3 manage.py migrate
+```
 
 #### MacOS
 instale o git na sua máquina a partir do link:
@@ -79,6 +88,11 @@ instale as dependências do projeto:
 ```
 source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+faça uma migração:
+```
+pyhton3 manage.py migrate
 ```
 
 ## Fluxo de trabalho
@@ -97,6 +111,18 @@ pip install -r requirements.txt
 Trabalhamos com Trunked Based, ou seja, todas as branchs são criadas a partir da **main**, e para enviar as alterações para produção, são criados Pull Requests (Merge Requests no caso do GitLab) das branchs feature/fix para a main novamente. Quando as branches menores são mergeadas, são apagadas do repositório remoto automaticamente.
 
 ## Executando comandos
+
+criação de nova migração:
+
+```
+python3 manage.py makemigrations
+```
+
+aplique uma migração:
+```
+python3 manage.py migrate
+```
+
 
 ## Como contribuir
 Crie uma branch nova e aponte um Merge Request para a branch main. Nossos desenvolvedores irão revisar sua sugestão e caso seja aprovado, será adicionado ao código fonte.
