@@ -13,7 +13,9 @@
 
 ## Ferramentas
 Controle de versão de código: Git
+
 Gerenciamento do repositório: GitLab
+
 Banco de Dados relacional: SQLite e Django (Python)
 
 ## Como usar o projeto
