@@ -1,0 +1,19 @@
+name: deploy preprod in vercel
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PREPROD }}
+on:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  build:
+    if: github.ref == 'refs/heads/preprod'
+    continue-on-error: false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+    - name: install vercel    
+      run: npm i -g vercel
+    - name: deploy to vercel
+      run: npx vercel --prod -y --token=${{ secrets.VERCEL_TOKEN }}
