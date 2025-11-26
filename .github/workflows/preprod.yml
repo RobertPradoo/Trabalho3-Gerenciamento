@@ -1,7 +1,5 @@
 name: deploy preprod in vercel
 
-environment: PREPROD
-
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PREPROD }}
@@ -14,6 +12,7 @@ jobs:
     if: github.ref == 'refs/heads/preprod'
     continue-on-error: false
     runs-on: ubuntu-latest
+    environment: PREPROD
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
