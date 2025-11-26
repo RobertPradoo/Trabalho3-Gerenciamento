@@ -1,7 +1,10 @@
 name: deploy preprod in vercel
+
+environment: PREPROD
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ env.VERCEL_PROJECT_ID_PREPROD }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PREPROD }}
 on:
   schedule:
     - cron: '0 0 * * *'
