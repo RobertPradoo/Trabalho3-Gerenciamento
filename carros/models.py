@@ -36,7 +36,11 @@ class Corrida(models.Model):
     safety_car = models.BooleanField(default=False)
     count_batidas = models.IntegerField(default=0)
     campeonato = models.ForeignKey(
-        "Campeonato", on_delete=models.CASCADE, related_name="corridas"
+        "Campeonato",
+        on_delete=models.CASCADE,
+        related_name="corridas",
+        null=True,
+        blank=False,
     )
 
     class Meta:
