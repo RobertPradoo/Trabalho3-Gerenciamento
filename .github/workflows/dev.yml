@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Export database URL
-      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB
+      run: export DATABASE_URL=${{ secrets.DATABASE_URL }}
     - name: Run migrations
       run: python manage.py migrate
 
