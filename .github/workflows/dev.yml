@@ -20,6 +20,12 @@ jobs:
         python-version: '3.11'
     - name: Install dependencies
       run: pip install -r requirements.txt
+    - name: debugging env
+      run: printenv
+    - name: debugging database URL
+      run: echo $DATABASE_URL
+    - name: debugging database URL 2
+      run: echo ${{ secrets.DATABASE_URL }}
     - name: Run migrations
       run: python manage.py migrate
 
