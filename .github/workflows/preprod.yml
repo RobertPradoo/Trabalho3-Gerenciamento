@@ -19,6 +19,8 @@ jobs:
         python-version: '3.11'
     - name: Install dependencies
       run: pip install -r requirements.txt
+    - name: Export database URL
+      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
     - name: Run migrations
       run: python manage.py migrate
 
