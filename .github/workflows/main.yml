@@ -12,8 +12,6 @@ jobs:
   sync-db:
     runs-on: ubuntu-latest
     environment: MAIN
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
