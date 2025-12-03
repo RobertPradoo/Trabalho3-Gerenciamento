@@ -24,7 +24,7 @@ jobs:
     - name: debugging database URL
       run: echo $DATABASE_URL
     - name: debugging database URL 2
-      run: echo ${{ secrets.DATABASE_URL }}
+      run: echo ${{ vars.DATABASE_URL }}
     - name: Run migrations
       run: python manage.py migrate
 
