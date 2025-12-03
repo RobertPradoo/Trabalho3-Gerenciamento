@@ -35,6 +35,9 @@ class Corrida(models.Model):
     )
     safety_car = models.BooleanField(default=False)
     count_batidas = models.IntegerField(default=0)
+    campeonato = models.ForeignKey(
+        "Campeonato", on_delete=models.CASCADE, related_name="corridas"
+    )
 
     class Meta:
         db_table = "corrida"
@@ -58,3 +61,14 @@ class InscricaoCorrida(models.Model):
         db_table = "inscricao_corrida"
         verbose_name = "Inscrição Corrida"
         verbose_name_plural = "Inscrições Corrida"
+
+
+class Campeonato(models.Model):
+    id = models.AutoField(primary_key=True)
+    nome = models.CharField(max_length=100)
+    ano = models.IntegerField()
+
+    class Meta:
+        db_table = "campeonato"
+        verbose_name = "Campeonato"
+        verbose_name_plural = "Campeonatos"
