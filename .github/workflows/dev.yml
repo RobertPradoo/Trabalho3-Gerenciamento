@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: DEV
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
@@ -20,12 +20,6 @@ jobs:
         python-version: '3.11'
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: debugging env
-      run: printenv
-    - name: debugging database URL
-      run: echo $DATABASE_URL
-    - name: debugging database URL 2
-      run: echo ${{ secrets.DATABASE_URL }}
     - name: Run migrations
       run: python manage.py migrate
 
