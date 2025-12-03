@@ -8,11 +8,26 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 jobs:
+  sync-db:
+    if: github.ref == 'refs/heads/preprod'
+    runs-on: ubuntu-latest
+    environment: PREPROD
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run migrations
+      run: python manage.py migrate
+
   build:
     if: github.ref == 'refs/heads/preprod'
     continue-on-error: false
     runs-on: ubuntu-latest
     environment: PREPROD
+    needs: sync-db
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
