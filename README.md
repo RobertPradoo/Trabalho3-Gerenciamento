@@ -52,7 +52,18 @@ Independentemente do ambiente, o fluxo de execução segue os seguintes passos a
 ---
 
 ## Estrutura de Banco de Dados
-[preencher]
+
+O projeto utiliza o **Supabase** como banco de dados, com **três instâncias distintas**, uma para cada ambiente de deploy:
+
+- **Desenvolvimento (`dev`)**: instância de banco isolada para testes e desenvolvimento.
+- **Pré-Produção (`preprod`)**: instância dedicada para homologação e validação antes de ir para produção.
+- **Produção (`main`)**: instância definitiva utilizada pelo ambiente em produção.
+
+Para que a aplicação Django se conecte corretamente ao banco de dados, é necessário configurar a variável de ambiente `DATABASE_URL`, contendo a **URI completa de conexão** da instância Supabase correspondente ao ambiente em uso.
+
+Cada branch (`dev`, `preprod` e `main`) possui sua própria **pipeline no GitHub Actions** que, antes de executar o deploy na Vercel, roda um job de **sync-db** responsável por aplicar as migrações do Django (`python manage.py migrate`) na instância de banco vinculada àquela branch/ambiente.
+
+![alt text](bd.png)
 
 ---
 
