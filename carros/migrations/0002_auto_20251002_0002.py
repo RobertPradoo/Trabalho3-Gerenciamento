@@ -6,9 +6,13 @@ from carros.models import Carro
 
 
 def create_initial_data(apps, schema_editor):
-    Carro.objects.create(descricao="Carro A")
-    Carro.objects.create(descricao="Carro B")
-    Carro.objects.create(descricao="Carro C")
+    Carro.objects.create(descricao="Lotus 97T")  # Senna
+    Carro.objects.create(descricao="Red Bull RB21")  # Verstappen
+    Carro.objects.create(descricao="McLaren MP4/4")  #
+    Carro.objects.create(descricao="Ferrari F2004")  # Schumacher
+    Carro.objects.create(descricao="Williams FW14B")  # Nigel Mansell
+    Carro.objects.create(descricao="Mercedes-AMG F1 W11")  # Hamilton
+    Carro.objects.create(descricao="Benetton B194")  # Jos Verstappen
 
 
 class Migration(migrations.Migration):

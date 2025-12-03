@@ -1,4 +1,4 @@
-# Trabalho Avaliativo Gerência da Configuração 2
+# Trabalho Avaliativo Gerência da Configuração
 ## Integrantes:
 - Bruno Martins
 - Luana Reginato Bassanesi
@@ -10,16 +10,64 @@
 
 >  ***Caxias do Sul, 2025***
 
+---
 
-## Ferramentas
-Controle de versão de código: Git
+## Sobre o Projeto
+Este projeto é a continuação do trabalho de gestão de configuração. Nesta etapa, o foco é a implementação de pipelines de CI/CD, ambientes distintos de deploy e gerenciamento de banco de dados via migrações automatizadas.
 
-Gerenciamento do repositório: GitLab
+O sistema consiste em uma página HTML disponibilizada via deploy automático e um banco de dados relacional atualizado via pipelines.
 
-Banco de Dados relacional: SQLite e Django (Python)
+## Ferramentas Utilizadas
+* **Controle de versão de código:** Git
+* **Gerenciamento do repositório:** GitHub
+* **Automação e Pipelines:** GitHub Actions
+* **Banco de Dados:** [inserir banco de dados]
+* **Hospedagem (Web):** Vercel
+* **Linguagem/Framework:** Python (Django)
+
+## Infraestrutura e Ambientes
+Para atender aos requisitos de entrega contínua, a infraestrutura foi dividida em três ambientes isolados. Cada branch corresponde a um ambiente de deploy com sua própria instância de banco de dados e URL da página web.
+
+| Ambiente | Branch | Trigger (Gatilho da Pipeline) | Descrição |
+| :--- | :--- | :--- | :--- |
+| **Desenvolvimento** | `dev` | **Manual** | Ambiente para testes iniciais e validação de features pelos desenvolvedores. |
+| **Pré-Produção** | `preprod` | **Agendado (Cron)** e **Manual** | Ambiente de homologação. A pipeline roda automaticamente todos os dias às 00:00 UTC e permite execução manual. |
+| **Produção** | `main` | **Push/Commit** e **Pull Request** | Ambiente final. Atualizado sempre que há uma nova versão estável mergeada na branch principal. |
+
+## Documentação das Pipelines
+
+As pipelines foram configuradas no diretório `.github/workflows`. Cada arquivo YAML (`dev.yml`, `preprod.yml`, `main.yml`) é responsável por gerenciar um ambiente específico.
+
+### O que a pipeline faz?
+Independentemente do ambiente, o fluxo de execução segue os seguintes passos automatizados:
+
+1.  **Checkout:** O código fonte da branch correspondente (main, preprod ou dev) é baixado no servidor de automação (Ubuntu Latest).
+2.  **Configuração do Ambiente de Deploy:**
+    * Utiliza a action setup-node para preparar o ambiente.
+    * Instala o pacote global do Vercel CLI via npm (npm i -g vercel).
+3.  **Deploy na Vercel:**
+    * Autentica-se utilizando o token seguro (VERCEL_TOKEN).
+    * Executa o comando de deploy (npx vercel --prod), que envia os arquivos estáticos e o código para os servidores da Vercel, vinculando-os ao projeto e organização configurados.
+
+---
+
+## Estrutura de Banco de Dados
+
+O projeto utiliza o **Supabase** como banco de dados, com **três instâncias distintas**, uma para cada ambiente de deploy:
+
+- **Desenvolvimento (`dev`)**: instância de banco isolada para testes e desenvolvimento.
+- **Pré-Produção (`preprod`)**: instância dedicada para homologação e validação antes de ir para produção.
+- **Produção (`main`)**: instância definitiva utilizada pelo ambiente em produção.
+
+Para que a aplicação Django se conecte corretamente ao banco de dados, é necessário configurar a variável de ambiente `DATABASE_URL`, contendo a **URI completa de conexão** da instância Supabase correspondente ao ambiente em uso.
+
+Cada branch (`dev`, `preprod` e `main`) possui sua própria **pipeline no GitHub Actions** que, antes de executar o deploy na Vercel, roda um job de **sync-db** responsável por aplicar as migrações do Django (`python manage.py migrate`) na instância de banco vinculada àquela branch/ambiente.
+
+![alt text](bd.png)
+
+---
 
 ## Como usar o projeto
-Esse projeto foi criado para o estudo da gestão de configuração, trabalhando com ferramentas diferentes das apresentadas em aula, controle de versão de banco de dados e alteração através de mutations.
 
 *Siga os passos da instalação do ambiente e as regras de fluxo de trabalho e contibuição.*
 
