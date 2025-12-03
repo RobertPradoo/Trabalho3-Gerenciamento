@@ -15,7 +15,7 @@ def create_initial_data(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("carros", "0002_auto_20251002_0004"),
+        ("carros", "0002_auto_20251002_0002"),
     ]
 
     operations = [

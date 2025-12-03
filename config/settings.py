@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import os
 from pathlib import Path
 
 import environ
@@ -20,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Inicializa o environ
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))  # lê o arquivo .env
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -29,7 +28,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))  # lê o arquivo .env
 SECRET_KEY = "django-insecure-tn@r9u8&=*bz&&)(9&9z%r6bd9zfq_sq!u0rcerfb99!g+(6_+"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -78,10 +77,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-supabase_url = env("DIRECT_URL")
-print(supabase_url)
-if supabase_url and not env("DEBUG"):
-    DATABASES = {"default": supabase_url}
+DATABASE_URL = env.db("DATABASE_URL", default="")
+if DATABASE_URL:
+    DATABASES = {"default": DATABASE_URL}
 else:
     DATABASES = {
         "default": {
